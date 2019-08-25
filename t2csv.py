@@ -10,6 +10,7 @@ import csv
 # parse commandline arguments
 PARSER = argparse.ArgumentParser(description='Format t2 CSV for further processing.')
 PARSER.add_argument('t2file', type=str, help='CSV file exported from t2 modd tracker')
+PARSER.add_argument('--outfile', type=str, default='output.csv', help='CSV file to write to')
 ARGS = PARSER.parse_args()
 
 # scale metadata
@@ -48,7 +49,7 @@ with open(ARGS.t2file, "r") as infile:
 
 
 # write data to file
-with open("output.csv", "w") as outfile:
+with open(ARGS.outfile, "w") as outfile:
     DATAWRITER = csv.writer(outfile, quoting=csv.QUOTE_MINIMAL)
 
     # sort by timestamp
