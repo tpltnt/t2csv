@@ -2,13 +2,13 @@
 """
 This script takes the CSV data exported from the t2
 moodtracker and formats it with one rating per column
-for better processing.
+and based on the timestamp for better processing.
 """
 import argparse
 import csv
 
 # parse commandline arguments
-PARSER = argparse.ArgumentParser(description='Format t2 CSV for further processing.')
+PARSER = argparse.ArgumentParser(description='Format t2 CSV for processing based on timestamps.')
 PARSER.add_argument('t2file', type=str, help='CSV file exported from t2 mood tracker')
 PARSER.add_argument('--outfile', type=str, default='output.csv', help='CSV file to write to')
 ARGS = PARSER.parse_args()
