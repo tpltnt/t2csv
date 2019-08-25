@@ -18,6 +18,8 @@ LOW_END = ""
 HIGH_END = ""
 
 NEW_ROWS = []
+TIMESTAMPS = set()
+
 # read data from file
 with open(ARGS.t2file, "r") as infile:
     READER = csv.reader(infile, delimiter=',', quotechar='"')
@@ -41,6 +43,13 @@ with open(ARGS.t2file, "r") as infile:
             data['timestamp'] = timestamp
             data['rating'] = rating
             NEW_ROWS.append(data)
+            TIMESTAMPS.add(timestamp)
         # TODO: process notes
 
-print(NEW_ROWS)
+# sort by timestamp
+for t in sorted(TIMESTAMPS):
+    # check each row
+    for d in NEW_ROWS:
+        # for the current timestamp (to process)
+        if t == d['timestamp']:
+            print(d)
