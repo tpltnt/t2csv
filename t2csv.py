@@ -46,10 +46,20 @@ with open(ARGS.t2file, "r") as infile:
             TIMESTAMPS.add(timestamp)
         # TODO: process notes
 
-# sort by timestamp
-for t in sorted(TIMESTAMPS):
-    # check each row
-    for d in NEW_ROWS:
-        # for the current timestamp (to process)
-        if t == d['timestamp']:
-            print(d)
+
+# write data to file
+with open("output.csv", "w") as outfile:
+    DATAWRITER = csv.writer(outfile, quoting=csv.QUOTE_MINIMAL)
+
+    # sort by timestamp
+    for t in sorted(TIMESTAMPS):
+        # check each row
+        for d in NEW_ROWS:
+            # for the current timestamp (to process)
+            if t == d['timestamp']:
+                DATAWRITER.writerow([
+                    d['timestamp'],
+                    d['low'],
+                    d['high'],
+                    d['rating']
+                ])
